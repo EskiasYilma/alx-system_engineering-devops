@@ -4,13 +4,13 @@
 
 hr=0
 
-while [ $hr -lt 12 ]
+while [ $hr -lt 13 ]
 do
     echo "Hour: " $hr
     min=1
     while [ $min -lt 60 ]
     do
-        printf "%d\n" $min
+        echo $min
         min=$((min+1))
     done
     hr=$((hr+1))
