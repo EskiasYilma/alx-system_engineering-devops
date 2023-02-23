@@ -8,6 +8,7 @@ i=1
 
 while [ $i -le 20 ]
 do
+    echo $i
     case $i in
         4)
             echo "4 and bad luck from China"
@@ -17,9 +18,6 @@ do
             ;;
         17)
             echo "17 and bad luck from Italy"
-            ;;
-        *)
-            echo $i
             ;;
     esac
     i=$((i+1))
