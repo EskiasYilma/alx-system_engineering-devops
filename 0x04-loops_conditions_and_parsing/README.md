@@ -1,1 +1,1 @@
-BASH 0x04. Loops, conditions and parsing
+#!/usr/bin/env bash
