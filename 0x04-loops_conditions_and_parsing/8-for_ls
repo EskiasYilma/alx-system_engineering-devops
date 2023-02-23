@@ -5,8 +5,7 @@
 # In a list format
 # Where only the part of the f after the first dash is displayed (refer to the example)
 
-for file in $(ls -p | grep -v /)
+for file in *
 do
-    f=$(echo $file | cut -d'-' -f2-)
-    echo $f
+    echo "$file" | cut -d '-' -f2
 done
