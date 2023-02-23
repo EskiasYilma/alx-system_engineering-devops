@@ -3,4 +3,4 @@
 
 #!/bin/bash
 
-awk '{ print $1 " " $9 }' apache-access.log | sort | uniq -c | awk '{ printf("%-15s %-10s %-10s\n", $1, $2, $3) }' | sort -nr
+awk '{ print $1 " " $9 }' apache-access.log | sort | uniq -c | awk '{ printf("%-10s %-10s\n", $2, $3) }' | sort -nr
