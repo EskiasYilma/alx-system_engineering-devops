@@ -3,15 +3,15 @@
 # display mins from 1 to 59
 
 hr=0
-
+min=1
 while [ $hr -le 12 ]
 do
-    echo "Hour: " $hr
-    min=1
+    echo "Hour:" $hr
     while [ $min -lt 60 ]
     do
         echo $min
         min=$((min+1))
     done
+    min=1
     hr=$((hr+1))
 done
