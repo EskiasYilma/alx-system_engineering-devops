@@ -23,22 +23,17 @@ PID_FILE="/var/run/my_process.pid"
 
 start() {
     ./manage_my_process &
-    echo $! > "$PID_FILE"
-    echo "manage_my_process started."
+    echo $$ > "$PID_FILE"
 }
 
 stop() {
-    pid=$(cat "$PID_FILE")
-    kill "$pid"
     rm -f "$PID_FILE"
-    echo "manage_my_process stopped."
-
+    pkill -of manage_my_process
 }
 
 restart() {
     stop
     start
-    echo "manage_my_process restarted."
 }
 
 if [ $# -eq 0 ]; then
@@ -48,15 +43,14 @@ fi
 case "$1" in
     start)
         start
+        echo "manage_my_process started."
         ;;
     stop)
         stop
+        echo "manage_my_process stopped."
         ;;
     restart)
         restart
+        echo "manage_my_process restarted."
         ;;
-    *)
-        echo "Usage: manage_my_process {start|stop|restart}"
 esac
-
-exit 0
