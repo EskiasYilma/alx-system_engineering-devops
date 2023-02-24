@@ -25,7 +25,7 @@ start() {
     if [ -f "$PID_FILE" ]; then
         echo "manage_my_process is already running"
     else
-        nohup ./manage_my_process >> /dev/null 2>&1 &
+        nohup manage_my_process >> /dev/null 2>&1 &
         echo $! > "$PID_FILE"
         echo "manage_my_process started."
     fi
@@ -53,7 +53,7 @@ restart() {
 }
 
 if [ $# -eq 0 ]; then
-    echo "Usage: $0 {start|stop|restart}"
+    echo "Usage: manage_my_process {start|stop|restart}"
     exit 1
 fi
 
