@@ -23,13 +23,12 @@ PID_FILE="/var/run/my_process.pid"
 
 start() {
     ./manage_my_process &
-    echo $$ > "$PID_FILE"
+    echo $! > "$PID_FILE"
 }
 
 stop() {
     if [ -f "$PID_FILE" ]; then
         rm "$PID_FILE"
-
     fi
     pkill -of manage_my_process
 }
