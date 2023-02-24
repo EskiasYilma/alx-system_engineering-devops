@@ -19,34 +19,44 @@
 # Displays manage_my_process restarted
 # Displays Usage: manage_my_process {start|stop|restart} if any other argument or no argument is passed
 
-# Functions
+PID_FILE="/var/run/my_process.pid"
+
 start() {
-    if [ -f /var/run/my_process.pid ]; then
-        echo "manage_my_process is already running."
+    if [ -f "$PID_FILE" ]; then
+        echo "manage_my_process is already running"
     else
-        nohup ./manage_my_process &
-        echo $! > /var/run/my_process.pid
+        nohup ./manage_my_process >> /dev/null 2>&1 &
+        echo $! > "$PID_FILE"
         echo "manage_my_process started."
     fi
 }
 
 stop() {
-    if [ ! -f /var/run/my_process.pid ]; then
-        echo "manage_my_process is not running."
+    if [ ! -f "$PID_FILE" ]; then
+        echo "manage_my_process is not running"
     else
-        kill $(cat /var/run/my_process.pid)
-        rm -f /var/run/my_process.pid
+        pid=$(cat "$PID_FILE")
+        kill "$pid"
+        rm -f "$PID_FILE"
         echo "manage_my_process stopped."
     fi
 }
 
 restart() {
-    stop
-    start
+    pid=$(cat "$PID_FILE")
+    kill "$pid"
+    rm -f "$PID_FILE"
+    nohup ./manage_my_process >> /dev/null 2>&1 &
+    echo $! > "$PID_FILE"
+
     echo "manage_my_process restarted."
 }
 
-# Main
+if [ $# -eq 0 ]; then
+    echo "Usage: $0 {start|stop|restart}"
+    exit 1
+fi
+
 case "$1" in
     start)
         start
