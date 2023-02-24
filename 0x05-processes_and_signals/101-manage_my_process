@@ -27,7 +27,10 @@ start() {
 }
 
 stop() {
-    rm "$PID_FILE"
+    if [ -f "$PID_FILE" ]; then
+        rm "$PID_FILE"
+
+    fi
     pkill -of manage_my_process
 }
 
