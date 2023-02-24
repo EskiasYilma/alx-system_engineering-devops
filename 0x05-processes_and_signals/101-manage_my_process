@@ -50,6 +50,8 @@ exec_commands(){
             restart
             echo "manage_my_process restarted."
             ;;
+        *)
+            ;;
     esac
 }
 
