@@ -27,7 +27,7 @@ start() {
 }
 
 stop() {
-    rm -f "$PID_FILE"
+    rm "$PID_FILE"
     pkill -of manage_my_process
 }
 
@@ -36,24 +36,31 @@ restart() {
     start
 }
 
-if [ $# -eq 0 ]; then
-    echo "Usage: manage_my_process {start|stop|restart}"
+exec_commands(){
+    case "$ARGV" in
+        start)
+            start
+            echo "manage_my_process started."
+            ;;
+        stop)
+            stop
+            echo "manage_my_process stopped."
+            ;;
+        restart)
+            restart
+            echo "manage_my_process restarted."
+            ;;
+        *)
+            echo "Usage: manage_my_process {start|stop|restart}"
+            ;;
+    esac
+}
+
+if [ $# -gt 0 ]; then
+    ARGV="$1"
+    exec_commands
+else
+    echo "Usage: manage_your_process {start|stop|restart}"
 fi
 
-case "$1" in
-    start)
-        start
-        echo "manage_my_process started."
-        ;;
-    stop)
-        stop
-        echo "manage_my_process stopped."
-        ;;
-    restart)
-        restart
-        echo "manage_my_process restarted."
-        ;;
-    *)
-        echo "Usage: manage_my_process {start|stop|restart}"
-        ;;
-esac
+
