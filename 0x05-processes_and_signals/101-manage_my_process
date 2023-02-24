@@ -22,39 +22,27 @@
 PID_FILE="/var/run/my_process.pid"
 
 start() {
-    if [ -f "$PID_FILE" ]; then
-        echo "manage_my_process is already running"
-    else
-        nohup manage_my_process >> /dev/null 2>&1 &
-        echo $! > "$PID_FILE"
-        echo "manage_my_process started."
-    fi
+    ./manage_my_process &
+    echo $! > "$PID_FILE"
+    echo "manage_my_process started."
 }
 
 stop() {
-    if [ ! -f "$PID_FILE" ]; then
-        echo "manage_my_process is not running"
-    else
-        pid=$(cat "$PID_FILE")
-        kill "$pid"
-        rm -f "$PID_FILE"
-        echo "manage_my_process stopped."
-    fi
-}
-
-restart() {
     pid=$(cat "$PID_FILE")
     kill "$pid"
     rm -f "$PID_FILE"
-    nohup ./manage_my_process >> /dev/null 2>&1 &
-    echo $! > "$PID_FILE"
+    echo "manage_my_process stopped."
 
+}
+
+restart() {
+    stop
+    start
     echo "manage_my_process restarted."
 }
 
 if [ $# -eq 0 ]; then
     echo "Usage: manage_my_process {start|stop|restart}"
-    exit 1
 fi
 
 case "$1" in
@@ -69,7 +57,6 @@ case "$1" in
         ;;
     *)
         echo "Usage: manage_my_process {start|stop|restart}"
-        exit 1
 esac
 
 exit 0
