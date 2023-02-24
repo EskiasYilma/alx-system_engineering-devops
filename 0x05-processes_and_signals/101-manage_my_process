@@ -1,1 +1,65 @@
 #!/usr/bin/env bash
+# manages manage_my_process.
+# shellcheck disable=SC2046
+# Requirements:
+
+# When passing the argument start:
+# Starts manage_my_process
+# Creates a file containing its PID in /var/run/my_process.pid
+# Displays manage_my_process started
+# When passing the argument stop:
+# Stops manage_my_process
+# Deletes the file /var/run/my_process.pid
+# Displays manage_my_process stopped
+# When passing the argument restart
+# Stops manage_my_process
+# Deletes the file /var/run/my_process.pid
+# Starts manage_my_process
+# Creates a file containing its PID in /var/run/my_process.pid
+# Displays manage_my_process restarted
+# Displays Usage: manage_my_process {start|stop|restart} if any other argument or no argument is passed
+
+# Functions
+start() {
+    if [ -f /var/run/my_process.pid ]; then
+        echo "manage_my_process is already running."
+    else
+        nohup ./manage_my_process &
+        echo $! > /var/run/my_process.pid
+        echo "manage_my_process started."
+    fi
+}
+
+stop() {
+    if [ ! -f /var/run/my_process.pid ]; then
+        echo "manage_my_process is not running."
+    else
+        kill $(cat /var/run/my_process.pid)
+        rm -f /var/run/my_process.pid
+        echo "manage_my_process stopped."
+    fi
+}
+
+restart() {
+    stop
+    start
+    echo "manage_my_process restarted."
+}
+
+# Main
+case "$1" in
+    start)
+        start
+        ;;
+    stop)
+        stop
+        ;;
+    restart)
+        restart
+        ;;
+    *)
+        echo "Usage: $0 {start|stop|restart}"
+        exit 1
+esac
+
+exit 0
