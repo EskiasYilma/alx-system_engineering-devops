@@ -33,14 +33,17 @@
 
 ## Infrastructure Issues
 ```
-    - SPOF: This infrastructure has a single point of failure (SPOF), which means that if the server
+    - Single Points of Failure (SPOF):
+    This infrastructure has a single point of failure (SPOF), which means that if the server
     fails, the website will become unavailable. To mitigate this issue, a backup server or load balancer can be added to the infrastructure.
 
-    - Downtime during maintenance: When deploying new code, the web server needs to be restarted,
+    - Downtime during maintenance:
+    When deploying new code, the web server needs to be restarted,
     which will cause the website to become temporarily unavailable. To mitigate this issue, a maintenance
     page can be displayed during downtime or the deployment can be done during low-traffic periods.
 
-    - Cannot scale: If the website experiences a high volume of incoming traffic, the infrastructure
+    - Cannot scale:
+    If the website experiences a high volume of incoming traffic, the infrastructure
     may not be able to handle the load. To mitigate this issue, the infrastructure can be scaled
     horizontally by adding more servers or vertically by upgrading the server hardware.
 ```
