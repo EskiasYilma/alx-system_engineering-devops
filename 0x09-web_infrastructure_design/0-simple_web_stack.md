@@ -1,6 +1,6 @@
 # 0x09-web_infrastructure_design
 ---
-![](https://m-ini.me/Task_0)
+![](https://github.com/EskiasYilma/alx-system_engineering-devops/blob/bd130f5cab9790bd6b6fbd498cb138f011208b4b/0x09-web_infrastructure_design/0-simple_web_stack.png)
 ---
 
 
