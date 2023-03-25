@@ -1,6 +1,6 @@
 # 0-simple_web_stack
 ---
-![](https://github.com/EskiasYilma/alx-system_engineering-devops/blob/b547ade43924fce7c08385d37552ff1c8f873118/0x09-web_infrastructure_design/0-simple_web_stack.png)
+![](https://github.com/EskiasYilma/alx-system_engineering-devops/blob/master/0x09-web_infrastructure_design/0-simple_web_stack.png)
 ---
 
 
