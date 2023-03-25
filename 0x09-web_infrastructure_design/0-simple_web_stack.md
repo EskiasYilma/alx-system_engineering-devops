@@ -6,28 +6,35 @@
 
 ## Infrastructure Specifics
 ```
-    - Server: A server is a computer system that provides services to other computers or devices
+    - Server:
+    A server is a computer system that provides services to other computers or devices
     connected to it over a network. In this case, the server will host the website and serve web
     pages to users who access it.
 
-    - Domain name: A domain name is a human-readable label that is used to identify a website on
+    - Domain name:
+    A domain name is a human-readable label that is used to identify a website on
     the internet. The role of the domain name is to provide a unique and memorable name for the
     website that can be used by users to access it.
 
-    - DNS record: The www record in www.foobar.com is a type of DNS record called a subdomain.
+    - DNS record:
+    The www record in www.foobar.com is a type of DNS record called a subdomain.
     It is used to indicate that the website is hosted on the www subdomain of the foobar.com domain.
 
-    - Web server: The web server is a software application that receives requests from clients (users)
+    - Web server:
+    The web server is a software application that receives requests from clients (users)
      and serves web pages in response. In this infrastructure, Nginx will be used as the web server.
 
-    - Application server: The application server is a software application that executes the application
+    - Application server:
+    The application server is a software application that executes the application
     code and generates dynamic content that is served by the web server. In this infrastructure, the application
     server will be used to execute the code base for the website.
 
-    - Database: The database is a software application that stores and manages data that is used
+    - Database:
+    The database is a software application that stores and manages data that is used
     by the application. In this infrastructure, MySQL will be used as the database.
 
-    - Communication: When a user requests the website, the server will communicate with the user's
+    - Communication:
+    When a user requests the website, the server will communicate with the user's
     computer over the internet using the HTTP protocol.
 ```
 

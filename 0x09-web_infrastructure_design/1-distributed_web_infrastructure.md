@@ -5,30 +5,35 @@
 
 ## Infrastructure Specifics
 ```
-    - Additional servers: In a three-server web infrastructure, we add two more servers to distribute
+    - Additional servers:
+    In a three-server web infrastructure, we add two more servers to distribute
     the load and increase reliability. Having multiple servers ensures that the website can handle a
     large number of requests and can continue running even if one server fails.
 
-    - Load balancer: We add a load balancer (HAproxy) to distribute incoming requests across the
+    - Load balancer:
+    We add a load balancer (HAproxy) to distribute incoming requests across the
     multiple servers in a way that optimizes resource utilization and minimizes response time. The
     distribution algorithm used in this case is round-robin, which distributes requests evenly across
     all available servers. Round-robin algorithm works by taking turns sending requests to each server
     in turn until all servers have received a request, and then starts again from the first server.
 
-    - Active-Active vs Active-Passive setup: In this setup, we are using an Active-Active setup, which
+    - Active-Active vs Active-Passive setup:
+    In this setup, we are using an Active-Active setup, which
     means that both the primary and replica databases are actively serving requests. In an Active-Passive
     setup, only the primary database is actively serving requests, while the replica database is in standby
     mode, waiting to take over if the primary database fails. The advantage of an Active-Active setup is
     that it can handle more load, as both databases can serve requests simultaneously. However, it requires
     more complex synchronization between the databases to ensure data consistency.
 
-    - Primary-Replica database cluster: In this setup, we are using a Primary-Replica (Master-Slave)
+    - Primary-Replica database cluster:
+    In this setup, we are using a Primary-Replica (Master-Slave)
     database cluster. In this type of cluster, the primary node receives all write requests and replicates
     them to the replica nodes. The replica nodes receive all read requests, and they can also be used to
     promote to the primary node in case of a failure. This setup provides high availability and data
     redundancy, as data is stored on multiple nodes.
 
-    - Primary vs Replica nodes: The primary node is responsible for handling all write requests,
+    - Primary vs Replica nodes:
+    The primary node is responsible for handling all write requests,
     ensuring data consistency across all nodes, and replicating data to the replica nodes. The replica
     nodes are responsible for handling read requests and can be promoted to the primary node in case of
     a failure. In terms of the application, the primary node is where all the writes are directed, and
