@@ -1,4 +1,4 @@
-# 0-simple_web_stack
+# 2-secured_and_monitored_web_infrastructure
 ---
 ![](https://github.com/EskiasYilma/alx-system_engineering-devops/blob/master/0x09-web_infrastructure_design/2-secured_and_monitored_web_infrastructure.png)
 ---
