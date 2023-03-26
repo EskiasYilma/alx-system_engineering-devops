@@ -1,4 +1,4 @@
-# 0-simple_web_stack
+# 3-scaled_up
 ---
 ![](https://github.com/EskiasYilma/alx-system_engineering-devops/blob/master/0x09-web_infrastructure_design/3-scale_up.png)
 ---
@@ -8,7 +8,7 @@
     Why are we adding additional elements?
 
     Load-balancer:
-    The load-balancer is added to distribute traffic between multiple servers, increasing the overall
+    The load-balancer is added to distribute traffic between multiple servers and act as a backup(passive), increasing the overall
      capacity and availability of the system. In this case, the load-balancer is configured as a cluster
       with another load-balancer, which adds redundancy and further increases availability.
 
