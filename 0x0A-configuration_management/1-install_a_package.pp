@@ -8,7 +8,7 @@ file { '/tmp/requirements.txt':
   content => "flask==2.1.0\n",
 }
 
-exec { 'install_flask':
+exec { 'install_flask_210':
   command => 'pip3 install -r /tmp/requirements.txt',
   path    => ['/usr/bin', '/usr/sbin'],
 }
