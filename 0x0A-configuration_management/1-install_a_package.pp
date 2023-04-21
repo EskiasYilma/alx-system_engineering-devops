@@ -4,7 +4,7 @@ package { 'python3-pip':
 }
 
 file { '/tmp/requirements.txt':
-  ensure => file,
+  ensure  => file,
   content => "flask==2.1.0\n",
 }
 
