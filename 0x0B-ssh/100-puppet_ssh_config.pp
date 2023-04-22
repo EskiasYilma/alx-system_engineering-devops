@@ -4,9 +4,7 @@ file { '/home/ubuntu/.ssh/ssh_config':
   group   => 'ubuntu',
   mode    => '0600',
   content => '
-  Host myserver
-      HostName 100.25.36.86
-      User ubuntu
+  Host 100.25.36.86
       IdentityFile ~/.ssh/school
       PasswordAuthentication no
   '
