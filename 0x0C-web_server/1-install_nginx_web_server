@@ -9,20 +9,20 @@ mkdir /var/www/html
 chmod -R 755 /var/www
 touch /var/www/html/index.html
 echo "Hello World!" > /var/www/html/index.html
-CONFIG=\
-"server {
-  listen 80;
-  listen [::]:80;
+# CONFIG=\
+# "server {
+#   listen 80;
+#   listen [::]:80;
 
-  server_name ;
+#   server_name ;
 
-  root /var/www/html;
-  index index.html index.htm index.nginx-debian.html;
+#   root /var/www/html;
+#   index index.html index.htm index.nginx-debian.html;
 
-  location / {
-      try_files $uri $uri/ =404;
-  }
-}"
-bash -c 'echo "$CONFIG" >> /etc/nginx/sites-available/default'
-service nginx restart
+#   location / {
+#       try_files $uri $uri/ =404;
+#   }
+# }"
+# bash -c 'echo "$CONFIG" >> /etc/nginx/sites-available/default'
+service nginx start
 
