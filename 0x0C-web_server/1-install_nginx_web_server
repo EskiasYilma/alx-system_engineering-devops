@@ -1,9 +1,8 @@
 #!/usr/bin/env bash
-# shellcheck disable=SC2154
 # Install Nginx on web-01
 
-sudo apt-get install -y nginx
-sudo service nginx start
+apt install -y nginx
+service nginx start
 mkdir /var/www/html
 chmod -R 755 /var/www
 touch /var/www/html/index.html
