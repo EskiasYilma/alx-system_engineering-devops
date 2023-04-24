@@ -3,8 +3,8 @@
 
 apt update
 apt install nginx -y
-mkdir -p /var/www/html
+ufw allow 'Nginx HTTP'
+mkdir /var/www/html
 touch /var/www/html/index.html
 echo "Hello World!" > /var/www/html/index.html
-path=$(whereis nginx | cut -d' ' -f2)
-$path
+service nginx restart
