@@ -4,5 +4,23 @@
 
 sudo apt-get install -y nginx
 sudo service nginx start
-echo "Hello World!" | sudo tee /usr/share/nginx/html/index.html
+mkdir /var/www/html
+chmod -R 755 /var/www
+touch /var/www/html/index.html
+echo "Hello World!" > /var/www/html/index.html
+# CONFIG=\
+# "server {
+#   listen 80;
+#   listen [::]:80;
+
+#   server_name ;
+
+#   root /var/www/html;
+#   index index.html index.htm index.nginx-debian.html;
+
+#   location / {
+#       try_files $uri $uri/ =404;
+#   }
+# }"
+# bash -c 'echo "$CONFIG" >> /etc/nginx/sites-available/default'
 
