@@ -1,1 +1,10 @@
 #!/usr/bin/env bash
+# Install Nginx on web-01
+
+apt update
+apt install nginx -y
+mkdir -p /var/www/html
+touch /var/www/html/index.html
+echo "Hello World!" > /var/www/html/index.html
+path=$(whereis nginx | cut -d' ' -f2)
+$path
