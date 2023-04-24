@@ -23,6 +23,6 @@ CONFIG=\
       try_files $uri $uri/ =404;
   }
 }"
-echo "$CONFIG" > /etc/nginx/sites-available/default
+bash -c 'echo "$CONFIG" >> /etc/nginx/sites-available/default'
 service nginx restart
 
