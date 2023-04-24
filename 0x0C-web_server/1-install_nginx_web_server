@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# shellcheck disable=SC2154
 # Install Nginx on web-01
 
 apt update
@@ -8,4 +9,20 @@ mkdir /var/www/html
 chmod -R 755 /var/www
 touch /var/www/html/index.html
 echo "Hello World!" > /var/www/html/index.html
+CONFIG=\
+"server {
+  listen 80;
+  listen [::]:80;
+
+  server_name ;
+
+  root /var/www/html;
+  index index.html index.htm index.nginx-debian.html;
+
+  location / {
+      try_files $uri $uri/ =404;
+  }
+}"
+echo "$CONFIG" > /etc/nginx/sites-available/default
 service nginx restart
+
