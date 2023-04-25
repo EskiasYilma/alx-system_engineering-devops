@@ -6,7 +6,9 @@ exec { 'update apt':
 
 # Install Nginx
 package { 'nginx'
-  ensure => 'installed',
+  ensure          => 'installed',
+  provider        => 'apt',
+  install_options => ['-y']
 }
 
 # Start Nginx Service
@@ -33,10 +35,10 @@ file { '/var/www/html':
 
 # index.html content
 file { '/var/www/html/index.html':
-  ensure => 'file',
-  mode   => '0644',
-  owner  => 'root',
-  group  => 'root',
+  ensure  => 'file',
+  mode    => '0644',
+  owner   => 'root',
+  group   => 'root',
   content => 'Hello World!',
   require => File['/var/www/html'],
 }
