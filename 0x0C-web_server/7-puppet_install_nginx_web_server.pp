@@ -27,15 +27,6 @@ file { '/var/www/html/index.html':
   content => $index_content,
 }
 
-# 404.html content
-$404_content = "Ceci n'est pas une page\n"
-file { '/var/www/html/404.html':
-  ensure  => file,
-  mode    => '0744',
-  owner   => 'www-data',
-  content => $404_content,
-}
-
 # Server Config
 file { '/etc/nginx/sites-enabled/default':
   ensure  => file,
@@ -75,7 +66,6 @@ file { '/etc/nginx/sites-enabled/default':
           try_files $uri $uri/ =404;
         }
         rewrite ^/redirect_me http://bachmanity.tech permanent;
-        error_page 404 /404.html;
 
         # pass PHP scripts to FastCGI server
         #
