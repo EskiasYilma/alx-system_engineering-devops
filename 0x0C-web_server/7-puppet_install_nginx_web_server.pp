@@ -5,32 +5,44 @@ exec { 'update apt':
 }
 
 # Install Nginx
-package { 'Install Nginx'
-  ensure          => 'installed',
-  name            => 'nginx',
-  provider        => 'apt',
-  install_options => ['-y']
+package { 'nginx'
+  ensure => 'installed',
+}
+
+# Start Nginx Service
+service { 'nginx':
+  ensure  => 'running',
+  enable  => true,
+  require => Package['nginx'],
+}
+
+# Firewall access
+firewall { 'nginx':
+  port   => 80,
+  proto  => 'tcp',
+  action => 'allow',
+}
+
+# html directory
+file { '/var/www/html':
+  ensure => 'directory',
+  mode   => '0755',
+  owner  => 'root',
+  group  => 'root',
 }
 
 # index.html content
 file { '/var/www/html/index.html':
-  ensure  => file,
-  mode    => '0744',
-  owner   => 'www-data',
-  content => "Hello World!\n"
+  ensure => 'file',
+  mode   => '0644',
+  owner  => 'root',
+  group  => 'root',
+  content => 'Hello World!',
+  require => File['/var/www/html'],
 }
-
-# Redirect Config
-exec { 'Redirect Config':
-  command     => '/bin/echo -e "rewrite ^/redirect_me http://bachmanity.tech permanent;" | sudo sed -i "53a\\$(cat)" /etc/nginx/sites-available/default',
-  path        => ['/usr/bin', '/bin', '/usr/sbin', '/sbin'],
-  refreshonly => true,
-  subscribe   => File['/etc/nginx/sites-available/default']
-}
-
 
 # Restart Nginx
-exec { 'Restart Nginx':
-  command => 'service nginx restart',
-  path    => ['/usr/bin', '/bin', '/usr/sbin', '/sbin']
+service { 'nginx':
+  ensure   => 'running',
+  provider => 'service',
 }
