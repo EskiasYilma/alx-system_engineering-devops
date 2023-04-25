@@ -12,12 +12,6 @@ package { 'Install Nginx'
   install_options => ['-y']
 }
 
-# Start Nginx
-exec { 'Start Nginx':
-  command => 'service nginx start',
-  path    => ['/usr/bin', '/usr/sbin'],
-}
-
 # index.html content
 $index_content = "Hello World!\n"
 file { '/var/www/html/index.html':
