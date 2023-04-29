@@ -28,8 +28,8 @@ firewall { 'nginx':
 # X-Served-By
 file_line { 'X-Served-By':
   ensure  => 'present',
-  path    => '/etc/nginx/nginx.conf',
-  after   => 'listen 80 default_server;',
+  path    => '/etc/nginx/sites-available/default',
+  after   => 'listen [::]:80 default_server;',
   line    => 'add_header X-Served-By $HOSTNAME;',
   require => Package['nginx'],
 }
