@@ -1,2 +1,2 @@
 #!/usr/bin/env bash
-# Install Nginx on web-02
+# Install and configure HAproxy on your lb-01 server.
