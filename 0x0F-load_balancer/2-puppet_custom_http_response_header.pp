@@ -5,7 +5,7 @@ exec { 'update apt':
 }
 
 # Install Nginx
-package { 'nginx'
+package { 'nginx':
   ensure          => 'installed',
   provider        => 'apt',
   install_options => ['-y']
@@ -28,7 +28,7 @@ firewall { 'nginx':
 # X-Served-By
 exec { 'X-Served-By':
   command  => 'sudo sed -i "/listen 80 default_server;/a add_header X-Served-By $HOSTNAME;" /etc/nginx/sites-available/default',
-  provider => shell,
+  provider => 'shell',
 }
 
 # Restart Nginx
