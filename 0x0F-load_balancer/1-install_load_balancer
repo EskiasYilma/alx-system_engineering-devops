@@ -1,2 +1,11 @@
 #!/usr/bin/env bash
 # Install and configure HAproxy on your lb-01 server.
+
+sudo apt update
+sudo apt install -y haproxy
+
+sudo sed -i -e '$a\listen appname 0.0.0.0:80\n\tmode http\n\tstats enable' /etc/haproxy/haproxy.cfg
+sudo sed -i -e '$a\\tbalance roundrobin\n\toption httpclose\n\toption forwardfor' /etc/haproxy/haproxy.cfg
+sudo sed -i -e '$a\\tserver 160208-web-01 100.25.36.86:80\n\tserver 160208-web-02 54.166.172.193:80' /etc/haproxy/haproxy.cfg
+
+sudo service haproxy restart
