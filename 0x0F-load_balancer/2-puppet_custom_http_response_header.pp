@@ -26,12 +26,9 @@ firewall { 'nginx':
 }
 
 # X-Served-By
-file_line { 'X-Served-By':
-  ensure  => 'present',
-  path    => '/etc/nginx/sites-available/default',
-  after   => 'listen [::]:80 default_server;',
-  line    => 'add_header X-Served-By $HOSTNAME;',
-  require => Package['nginx'],
+exec { 'X-Served-By':
+  command  => 'sudo sed -i "16i\add_header X-Served-By $HOSTNAME;" /etc/nginx/nginx.conf',
+  provider => shell,
 }
 
 # Restart Nginx
