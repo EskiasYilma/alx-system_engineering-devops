@@ -12,6 +12,7 @@ sudo touch /var/www/html/404.html
 echo "Hello World!" | sudo tee /var/www/html/index.html
 echo "Ceci n'est pas une page" | sudo tee /var/www/html/404.html
 sudo service nginx start
-sudo sed -i '54i\error_page 404 /404.html;' /etc/nginx/sites-available/default
+sudo sed -i '54i\rewrite ^/redirect_me http://bachmanity.tech permanent;' /etc/nginx/sites-enabled/default
+sudo sed -i '55i\error_page 404 /404.html;' /etc/nginx/sites-enabled/default
 sudo sed -i "16i\add_header X-Served-By $HOSTNAME;" /etc/nginx/nginx.conf
 sudo service nginx restart
