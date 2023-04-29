@@ -25,53 +25,6 @@ firewall { 'nginx':
   action => 'allow',
 }
 
-# html directory
-file { '/var/www/html':
-  ensure => 'directory',
-  mode   => '0755',
-  owner  => 'root',
-  group  => 'root',
-}
-
-# index.html content
-file { '/var/www/html/index.html':
-  ensure  => 'file',
-  mode    => '0644',
-  owner   => 'root',
-  group   => 'root',
-  content => 'Hello World!',
-  require => File['/var/www/html'],
-}
-
-# 404.html content
-file { '/var/www/html/404.html':
-  ensure  => 'file',
-  mode    => '0644',
-  owner   => 'root',
-  group   => 'root',
-  content => 'Ceci n'est pas une page',
-  require => File['/var/www/html'],
-}
-
-
-# 301 redirection
-file_line { 'redirection':
-  ensure  => 'present',
-  path    => '/etc/nginx/sites-enabled/default',
-  after   => 'server_name _;',
-  line    => 'rewrite ^/redirect_me http://bachmanity.tech permanent;',
-  require => Package['nginx'],
-}
-
-# 404 Error
-file_line { 'error':
-  ensure  => 'present',
-  path    => '/etc/nginx/sites-enabled/default',
-  after   => 'server_name _;',
-  line    => 'error_page 404 /404.html;',
-  require => Package['nginx'],
-}
-
 # X-Served-By
 file_line { 'X-Served-By':
   ensure  => 'present',
