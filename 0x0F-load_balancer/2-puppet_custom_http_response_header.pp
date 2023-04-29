@@ -53,6 +53,16 @@ file { '/var/www/html/404.html':
   require => File['/var/www/html'],
 }
 
+
+# 301 redirection
+file_line { 'redirection':
+  ensure  => 'present',
+  path    => '/etc/nginx/sites-enabled/default',
+  after   => 'server_name _;',
+  line    => 'rewrite ^/redirect_me http://bachmanity.tech permanent;',
+  require => Package['nginx'],
+}
+
 # 404 Error
 file_line { 'error':
   ensure  => 'present',
@@ -66,7 +76,7 @@ file_line { 'error':
 file_line { 'X-Served-By':
   ensure  => 'present',
   path    => '/etc/nginx/nginx.conf',
-  after   => '# server_name_in_redirect off;',
+  after   => 'listen 80 default_server;',
   line    => 'add_header X-Served-By $HOSTNAME;',
   require => Package['nginx'],
 }
