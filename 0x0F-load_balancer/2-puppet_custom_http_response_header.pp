@@ -27,7 +27,7 @@ firewall { 'nginx':
 
 # X-Served-By
 exec { 'X-Served-By':
-  command  => 'sudo sed -i "16i\add_header X-Served-By $HOSTNAME;" /etc/nginx/nginx.conf',
+  command  => 'sudo sed -i "/listen 80 default_server;/a add_header X-Served-By $HOSTNAME;" /etc/nginx/sites-available/default',
   provider => shell,
 }
 
