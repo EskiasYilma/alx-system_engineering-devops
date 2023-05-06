@@ -14,6 +14,12 @@ global
     # turn on stats unix socket
     stats socket /var/lib/haproxy/stats
 
+    # https://ssl-config.mozilla.org/#server=haproxy&server-version=2.0.3&config=intermediate
+
+    ssl-default-bind-ciphers ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-CHACHA20-POLY1305:ECDHE-RSA-CHACHA20-POLY1305:DHE-RSA-AES128-GCM-SHA256:DHE-RSA-AES256-GCM-SHA384
+    ssl-default-bind-ciphersuites TLS_AES_128_GCM_SHA256:TLS_AES_256_GCM_SHA384:TLS_CHACHA20_POLY1305_SHA256
+    ssl-default-bind-options prefer-client-ciphers no-sslv3 no-tlsv10 no-tlsv11 no-tls-tickets
+
 #---------------------------------------------------------------------
 # common defaults that all the 'listen' and 'backend' sections will
 # use if not designated in their block
@@ -36,11 +42,17 @@ defaults
     timeout check           10s
     maxconn                 3000
 
-listen my_nginx_cluster
+frontend bachmanity.tech-http
     bind *:80
-    mode http
+    http-request set-header X-Forwarded-Proto http
+    default_backend bachmanity.tech-backend
+
+frontend bachmanity.tech-https
+    bind *:443 ssl crt /home/ubuntu/haproxy_cert/cert.pem alpn h2,http/1.1
+    http-request set-header X-Forwarded-Proto https
+    default_backend bachmanity.tech-backend
+
+backend bachmanity.tech-backend
     balance roundrobin
-    option httpclose
-    option forwardfor
     server 160208-web-01 100.25.36.86:80 check                 #Nginx1
     server 160208-web-02 54.166.172.193:80 check               #Nginx2
