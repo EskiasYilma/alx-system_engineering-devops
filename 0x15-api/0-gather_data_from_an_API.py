@@ -1,7 +1,17 @@
 #!/usr/bin/python3
 """
-A script that, using this REST API, for a given employee ID, \
-returns information about his/her TODO list progress.
+The script must display on the standard output the employee TODO list \
+progress in this exact format:
+
+    First line: Employee EMPLOYEE_NAME is done with \
+    tasks(NUMBER_OF_DONE_TASKS/TOTAL_NUMBER_OF_TASKS):
+        EMPLOYEE_NAME: name of the employee
+        NUMBER_OF_DONE_TASKS: number of completed tasks
+        TOTAL_NUMBER_OF_TASKS: total number of tasks, which is the sum of \
+        completed and non-completed tasks
+    Second and N next lines display the title of completed tasks: \
+    TASK_TITLE (with 1 tabulation and 1 space before the TASK_TITLE)
+
 """
 import requests
 import sys
@@ -9,24 +19,23 @@ import urllib
 
 
 if __name__ == "__main__":
-    if len(sys.argv) < 2:
-        sys.exit(0)
-    else:
-        user_id = str(sys.argv[1])
+    user_id = str(sys.argv[1])
     url = 'https://jsonplaceholder.typicode.com/users'
     end_points = ["posts", "comments", "albums",
                   "photos", "todos", "users"]
-    EMPLOYEE_NAME = requests.get(url + "/" + user_id).json().get('name')
-    tda = requests.get('https://jsonplaceholder.typicode.com/users/{}/todos'.
-                       format(user_id)).json()
-    total_tasks = len(tda)
-    completed_tasks = [i.get('title') for i in tda if i['completed'] is True]
-    tcp = len(completed_tasks)
-    output = "Employee " + EMPLOYEE_NAME + " is done with tasks"
-    output = output + "({}/{}):\n\t ".format(tcp,
-                                             total_tasks)
-    for i, j in enumerate(completed_tasks):
-        output = output + j
-        if i < len(completed_tasks)-1:
-            output += "\n\t "
-    print(output)
+
+    emp_name = requests.get(url + "/" + user_id).json().get('name')
+    td = requests.get("http://jsonplaceholder.typicode.com/todos").json()
+    ttl_tasks = 0
+    comp_tasks = []
+    for i in td:
+        if i.get("userId") == int(user_id):
+            ttl_tasks += 1
+            if i.get("completed") is True:
+                comp_tasks.append(i.get('title'))
+
+    print("Employee {} is done with tasks({:d}/{:d})"
+          .format(emp_name, len(comp_tasks), ttl_tasks))
+
+    for i in comp_tasks:
+        print("\t {}".format(i))
