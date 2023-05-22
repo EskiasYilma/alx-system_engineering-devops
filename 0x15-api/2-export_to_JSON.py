@@ -33,10 +33,6 @@ if __name__ == "__main__":
         temp_tasks = []
         for i in td:
             if i.get("userId") == int(user_id):
-                t_csv = '"{}","{}","{}","{}"'.format(i.get("userId"),
-                                                     name,
-                                                     i.get("completed"),
-                                                     i.get("title"))
                 task = {"task": i.get("title"),
                         "completed": i.get("completed"),
                         "username": name}
