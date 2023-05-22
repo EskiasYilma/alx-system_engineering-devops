@@ -17,20 +17,18 @@ def api_0():
         sys.exit(0)
     else:
         user_id = str(sys.argv[1])
-
+    url = 'https://jsonplaceholder.typicode.com/users'
     end_points = ["posts", "comments", "albums",
                   "photos", "todos", "users"]
-    n = requests.get('https://jsonplaceholder.typicode.com/users/{}'.
-                     format(user_id)).json()['name']
+    EMPLOYEE_NAME = requests.get(url + "/" + user_id).json()['name']
     tda = requests.get('https://jsonplaceholder.typicode.com/users/{}/todos'.
                        format(user_id)).json()
     total_tasks = len(tda)
     completed_tasks = [i['title'] for i in tda if i['completed'] is True]
     tcp = len(completed_tasks)
-    output = "Employee {} is done with tasks({}/{}):\n\t ".format(
-                                                                  n,
-                                                                  tcp,
-                                                                  total_tasks)
+    output = "Employee " + EMPLOYEE_NAME + " is done with tasks"
+    output = output + "({}/{}):\n\t ".format(tcp,
+                                             total_tasks)
     for i, j in enumerate(completed_tasks):
         output = output + j
         if i < len(completed_tasks)-1:
