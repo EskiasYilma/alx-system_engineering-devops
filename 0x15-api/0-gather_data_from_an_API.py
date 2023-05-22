@@ -1,8 +1,7 @@
 #!/usr/bin/python3
 """
-The script must display on the standard output the employee TODO list \
+The script that displays on the standard output the employee TODO list \
 progress in this exact format:
-
     First line: Employee EMPLOYEE_NAME is done with \
     tasks(NUMBER_OF_DONE_TASKS/TOTAL_NUMBER_OF_TASKS):
         EMPLOYEE_NAME: name of the employee
@@ -11,11 +10,9 @@ progress in this exact format:
         completed and non-completed tasks
     Second and N next lines display the title of completed tasks: \
     TASK_TITLE (with 1 tabulation and 1 space before the TASK_TITLE)
-
 """
 import requests
 import sys
-import urllib
 
 
 if __name__ == "__main__":
