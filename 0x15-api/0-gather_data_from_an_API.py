@@ -38,7 +38,7 @@ if __name__ == "__main__":
             if i.get("completed") is True:
                 comp_tasks.append(i.get('title'))
 
-    print("Employee {} is done with tasks({:d}/{:d})"
+    print("Employee {} is done with tasks({:d}/{:d}):"
           .format(name, len(comp_tasks), ttl_tasks))
 
     for i in comp_tasks:
