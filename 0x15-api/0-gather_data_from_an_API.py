@@ -20,11 +20,11 @@ def api_0():
     url = 'https://jsonplaceholder.typicode.com/users'
     end_points = ["posts", "comments", "albums",
                   "photos", "todos", "users"]
-    EMPLOYEE_NAME = requests.get(url + "/" + user_id).json()['name']
+    EMPLOYEE_NAME = requests.get(url + "/" + user_id).json().get('name')
     tda = requests.get('https://jsonplaceholder.typicode.com/users/{}/todos'.
                        format(user_id)).json()
     total_tasks = len(tda)
-    completed_tasks = [i['title'] for i in tda if i['completed'] is True]
+    completed_tasks = [i.get('title') for i in tda if i['completed'] is True]
     tcp = len(completed_tasks)
     output = "Employee " + EMPLOYEE_NAME + " is done with tasks"
     output = output + "({}/{}):\n\t ".format(tcp,
