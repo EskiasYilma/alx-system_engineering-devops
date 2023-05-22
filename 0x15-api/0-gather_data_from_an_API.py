@@ -24,7 +24,11 @@ if __name__ == "__main__":
     end_points = ["posts", "comments", "albums",
                   "photos", "todos", "users"]
 
-    emp_name = requests.get(url + "/" + user_id).json().get('name')
+    r = requests.get(url).json()
+    name = None
+    for i in r:
+        if i.get('id') == int(user_id):
+            name = i['name']
     td = requests.get("http://jsonplaceholder.typicode.com/todos").json()
     ttl_tasks = 0
     comp_tasks = []
@@ -35,7 +39,7 @@ if __name__ == "__main__":
                 comp_tasks.append(i.get('title'))
 
     print("Employee {} is done with tasks({:d}/{:d})"
-          .format(emp_name, len(comp_tasks), ttl_tasks))
+          .format(name, len(comp_tasks), ttl_tasks))
 
     for i in comp_tasks:
         print("\t {}".format(i))
