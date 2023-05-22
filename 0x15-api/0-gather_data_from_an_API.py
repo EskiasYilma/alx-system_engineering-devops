@@ -8,11 +8,7 @@ import sys
 import urllib
 
 
-def api_0():
-    """
-    A script that, using this REST API, for a given employee ID, \
-    returns information about his/her TODO list progress.
-    """
+if __name__ == "__main__":
     if len(sys.argv) < 2:
         sys.exit(0)
     else:
@@ -34,7 +30,3 @@ def api_0():
         if i < len(completed_tasks)-1:
             output += "\n\t "
     print(output)
-
-
-if __name__ == "__main__":
-    api_0()
