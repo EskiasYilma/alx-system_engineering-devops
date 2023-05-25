@@ -28,7 +28,7 @@ if __name__ == "__main__":
         with open("{}.csv".format(user_id), 'w') as f:
             for i in todos:
                 t_csv = '"{}","{}","{}","{}"\n'.format(i.get("userId"),
-                                                     name,
-                                                     i.get("completed"),
-                                                     i.get("title"))
+                                                       name,
+                                                       i.get("completed"),
+                                                       i.get("title"))
                 f.write(t_csv)
