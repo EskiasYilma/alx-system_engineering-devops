@@ -17,19 +17,15 @@ import sys
 
 if __name__ == "__main__":
     user_id = str(sys.argv[1])
-    url = 'https://jsonplaceholder.typicode.com/users'
+    url = 'https://jsonplaceholder.typicode.com/users/{}'.format(user_id)
     end_points = ["posts", "comments", "albums",
                   "photos", "todos", "users"]
 
     r = requests.get(url).json()
-    name = None
-    for i in r:
-        if i.get('id') == int(user_id):
-            name = i['name']
+    name = r.get('username')
     td = requests.get("http://jsonplaceholder.typicode.com/todos").json()
     data = {}
     with open("{}.json".format(user_id), 'w') as f:
-
         temp_tasks = []
         for i in td:
             if i.get("userId") == int(user_id):
