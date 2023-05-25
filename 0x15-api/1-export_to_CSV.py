@@ -15,22 +15,20 @@ import sys
 
 
 if __name__ == "__main__":
-    user_id = str(sys.argv[1])
-    url = 'https://jsonplaceholder.typicode.com/users'
-    end_points = ["posts", "comments", "albums",
-                  "photos", "todos", "users"]
+    if len(sys.argv) > 1:
+        user_id = str(sys.argv[1])
+        url = 'https://jsonplaceholder.typicode.com/users/{}'.format(user_id)
+        end_points = ["posts", "comments", "albums",
+                      "photos", "todos", "users"]
 
-    r = requests.get(url).json()
-    name = None
-    for i in r:
-        if i.get('id') == int(user_id):
-            name = i['name']
-    td = requests.get("http://jsonplaceholder.typicode.com/todos").json()
-    with open("{}.csv".format(user_id), 'w') as f:
-        for i in td:
-            if i.get("userId") == int(user_id):
-                t_csv = '"{}","{}","{}","{}"'.format(i.get("userId"),
+        r = requests.get(url).json()
+        name = r.get("name")
+        td = requests.get("http://jsonplaceholder.typicode.com/todos").json()
+        todos = list(filter(lambda i: i.get('userId') == user_id, td))
+        with open("{}.csv".format(user_id), 'w') as f:
+            for i in todos:
+                t_csv = '"{}","{}","{}","{}"\n'.format(i.get("userId"),
                                                      name,
                                                      i.get("completed"),
                                                      i.get("title"))
-                f.write(t_csv + "\n")
+                f.write(t_csv)
