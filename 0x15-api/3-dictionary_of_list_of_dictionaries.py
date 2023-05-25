@@ -33,7 +33,7 @@ def get_user():
         for i in r:
             t_list = get_tasks(i.get("id"))
             for j in t_list:
-                j['username'] = i.get("name")
+                j['username'] = i.get("username")
             data[i.get("id")] = t_list
         json.dump(data, f)
 
