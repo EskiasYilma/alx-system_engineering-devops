@@ -22,13 +22,15 @@ if __name__ == "__main__":
                       "photos", "todos", "users"]
 
         r = requests.get(url).json()
-        name = r.get("name")
+        name = r.get("username")
         td = requests.get("http://jsonplaceholder.typicode.com/todos/").json()
         # todos = list(filter(lambda x: x.get('userId') == user_id, td))
         # print(todos)
         with open("{}.csv".format(user_id), 'w') as f:
             for i in td:
-                if i.get("userId") == int(user_id):
+                if i.get("userId") != int(user_id):
+                    pass
+                else:
                     t_csv = '"{}","{}","{}","{}"\n'.format(i.get("userId"),
                                                            name,
                                                            i.get("completed"),
