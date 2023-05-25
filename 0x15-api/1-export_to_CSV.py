@@ -23,12 +23,14 @@ if __name__ == "__main__":
 
         r = requests.get(url).json()
         name = r.get("name")
-        td = requests.get("http://jsonplaceholder.typicode.com/todos").json()
-        todos = list(filter(lambda i: i.get('userId') == user_id, td))
+        td = requests.get("http://jsonplaceholder.typicode.com/todos/").json()
+        # todos = list(filter(lambda x: x.get('userId') == user_id, td))
+        # print(todos)
         with open("{}.csv".format(user_id), 'w') as f:
-            for i in todos:
-                t_csv = '"{}","{}","{}","{}"\n'.format(i.get("userId"),
-                                                       name,
-                                                       i.get("completed"),
-                                                       i.get("title"))
-                f.write(t_csv)
+            for i in td:
+                if i.get("userId") == int(user_id):
+                    t_csv = '"{}","{}","{}","{}"\n'.format(i.get("userId"),
+                                                           name,
+                                                           i.get("completed"),
+                                                           i.get("title"))
+                    f.write(t_csv)
