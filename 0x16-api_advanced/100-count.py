@@ -54,10 +54,10 @@ def count_words(subreddit, wordlist, hot_list=[], after=None, count=0):
                     for k in str(j).lower().split():
                         if str(i) == str(k):
                             wd[i] += 1
-            sorted_hot = sorted(wd.items(), key=lambda v: (v[1], v[0]),
+            srtd_hot = sorted(wd.items(), key=lambda v: (v[1], v[0].lower()),
                                 reverse=True)
-            for i in sorted_hot:
+            for i in srtd_hot:
                 if i[1] != 0:
                     print("{}: {}".format(i[0], i[1]))
     except Exception:
-        print()
+        return
