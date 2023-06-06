@@ -1,4 +1,6 @@
 #!/usr/bin/python3
+
+import requests
 """
 a function that queries the Reddit API and returns the number\
  of subscribers (not active users, total subscribers) for a \
@@ -36,13 +38,3 @@ def number_of_subscribers(subreddit):
         return r.json()['data']['subscribers']
     except Exception:
         return 0
-
-
-if __name__ == "__main__":
-
-    import requests
-    import os
-    try:
-        number_of_subscribers(os.sys.argv[1])
-    except Exception:
-        os.sys.exit(0)
