@@ -60,4 +60,4 @@ def count_words(subreddit, wordlist, hot_list=[], after=None, count=0):
                 if i[1] != 0:
                     print("{}: {}".format(i[0], i[1]))
     except Exception:
-        return
+        print()
