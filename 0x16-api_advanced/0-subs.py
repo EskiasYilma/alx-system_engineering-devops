@@ -32,7 +32,10 @@ def number_of_subscribers(subreddit):
 
     r = requests.get("https://www.reddit.com/r/{}/about.json"
                      .format(str(subreddit)), headers=headers)
-    print(r.json()['data']['subscribers'])
+    try:
+        return r.json()['data']['subscribers']\
+    except:
+        return 0
 
 
 if __name__ == "__main__":
