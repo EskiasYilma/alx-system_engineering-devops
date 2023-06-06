@@ -29,8 +29,8 @@ def top_ten(subreddit):
     r = requests.get("https://www.reddit.com/r/{}/hot.json"
                      .format(str(subreddit)), headers=headers)
     try:
-        dt = r.json()['data']['children']
+        dt = r.json().get('data').get('children')
         for i in dt[:10]:
-            print(i['data']['title'])
+            print(i.get('data').get('title'))
     except Exception:
         return None
