@@ -21,9 +21,11 @@ def print_sorted(hot_list, wordlist):
                 for k in str(j).lower().split():
                     if str(i) == str(k):
                         wd[i] += 1
-        sorted_hot = sorted(wd.items(), key=lambda v: v[1], reverse=True)
+        sorted_hot = sorted(wd.items(), key=lambda v: (v[1], v[0]),
+                            reverse=True)
         for i in sorted_hot:
-            print("{}: {}".format(i[0], i[1]))
+            if i[1] != 0:
+                print("{}: {}".format(i[0], i[1]))
 
 
 def count_words(subreddit, wordlist, hot_list=[], after=None, count=0):
@@ -50,8 +52,10 @@ def count_words(subreddit, wordlist, hot_list=[], after=None, count=0):
 
     r = requests.get("https://www.reddit.com/r/{}/.json?sort={}\
                       &limit={}&count={}&after={}"
-                     .format(str(subreddit), "hot", 100, count, after),
-                     headers=headers, allow_redirects=False)
+                     .format(str(subreddit), "hot", 100,
+                             count, after if after else ''),
+                     headers=headers,
+                     allow_redirects=False)
     try:
         dt = r.json().get('data').get('children')
         for x in dt:
