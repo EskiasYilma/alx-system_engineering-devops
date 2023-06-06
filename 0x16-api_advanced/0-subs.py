@@ -13,8 +13,7 @@ def number_of_subscribers(subreddit):
     function should return 0.
     """
     headers = {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; rv:113.0) \
-                       Gecko/20100101 Firefox/113.0',
+        'User-Agent': 'test',
     }
 
     r = requests.get('https://reddit.com/r/' + subreddit + '/about/.json', headers=headers)
