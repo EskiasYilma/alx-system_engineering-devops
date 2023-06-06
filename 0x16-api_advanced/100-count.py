@@ -6,6 +6,9 @@ import requests
 
 
 def print_sorted(hot_list, wordlist):
+    """
+    matches and prints out sorted list
+    """
     if hot_list != []:
         wd = {}
 
@@ -15,7 +18,7 @@ def print_sorted(hot_list, wordlist):
 
         for i in wordlist:
             for j in hot_list:
-                for k in str(j).lower().split(' '):
+                for k in str(j).lower().split():
                     if str(i) == str(k):
                         wd[i] += 1
         sorted_hot = sorted(wd.items(), key=lambda v: v[1], reverse=True)
