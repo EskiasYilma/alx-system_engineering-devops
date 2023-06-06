@@ -32,12 +32,10 @@ def recurse(subreddit, hot_list=[], after=None, count=0):
                       &limit={}&count={}&after={}"
                      .format(str(subreddit), "hot", 100, count, after),
                      headers=headers)
-    dt = r.json().get('data').get('children')
-    after = r.json().get('data').get('after')
     try:
         dt = r.json().get('data').get('children')
         for x in dt:
-            hot_list.append(x['data']['title'])
+            hot_list.append(x.get('data').get('title'))
         after = r.json().get('data').get('after')
         count += len(dt)
         if after:
