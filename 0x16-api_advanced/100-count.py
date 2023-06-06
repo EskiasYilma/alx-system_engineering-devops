@@ -42,7 +42,7 @@ def count_words(subreddit, wordlist, hot_list=[], after=None, count=0):
         else:
             wd = {}
 
-            wordlist = set([x.lower() for x in wordlist])
+            wordlist = [x.lower() for x in wordlist]
             for i in wordlist:
                 wd[i] = 0
 
@@ -56,4 +56,4 @@ def count_words(subreddit, wordlist, hot_list=[], after=None, count=0):
                 print("{}: {}".format(i[0], i[1]))
 
     except Exception:
-        print("")
+        return
