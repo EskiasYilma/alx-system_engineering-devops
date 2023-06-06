@@ -42,13 +42,15 @@ def count_words(subreddit, wordlist, hot_list=[], after=None, count=0):
         else:
             wd = {}
 
+            wordlist = set([x.lower() for x in wordlist])
             for i in wordlist:
                 wd[i] = 0
 
             for i in wordlist:
                 for j in hot_list:
-                    if str(i) in str(j).lower().split(' '):
-                        wd[i] += 1
+                    for k in str(j).lower().split(' '):
+                        if str(i) == str(k):
+                            wd[i] += 1
             sorted_hot = sorted(wd.items(), key=lambda v: v[1], reverse=True)
             for i in sorted_hot:
                 print("{}: {}".format(i[0], i[1]))
