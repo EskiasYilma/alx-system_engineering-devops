@@ -34,4 +34,4 @@ def top_ten(subreddit):
         for i in dt[:10]:
             print(i.get('data').get('title'))
     except Exception:
-        return None
+        print(None)
