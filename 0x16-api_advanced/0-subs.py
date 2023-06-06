@@ -20,8 +20,7 @@ def number_of_subscribers(subreddit):
                        Gecko/20100101 Firefox/113.0',
     }
 
-    r = requests.get("https://www.reddit.com/r/{}/about.json"
-                     .format(str(subreddit)), headers=headers)
+    r = requests.get('https://reddit.com/r/' + subreddit + '/about/.json', headers=headers)
     try:
         return (r.json().get('data').get('subscribers'))
     except Exception:
