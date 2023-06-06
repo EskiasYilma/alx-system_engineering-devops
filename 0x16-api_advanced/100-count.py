@@ -7,7 +7,7 @@ of given keywords (case-insensitive, delimited by spaces.
 import requests
 
 
-def count_words(subreddit, word_list, hot_list=[], after=None, count=0):
+def count_words(subreddit, wordlist, hot_list=[], after=None, count=0):
     """
     A recursive function that queries the Reddit API, parses \
     the title of all hot articles, and prints a sorted count \
@@ -42,22 +42,22 @@ def count_words(subreddit, word_list, hot_list=[], after=None, count=0):
         after = r.json().get('data').get('after')
         count += len(dt)
         if after:
-            count_words(subreddit, word_list, hot_list, after, count)
+            count_words(subreddit, wordlist, hot_list, after, count)
         else:
             wd = {}
-            word_list = [x.lower() for x in word_list]
-            for i in word_list:
+            wordlist = [x.lower() for x in wordlist]
+            for i in wordlist:
                 wd[i] = 0
 
-            for i in word_list:
+            for i in wordlist:
                 for j in hot_list:
-                    words = [word.strip('.,!_') for word in j.lower().split()]
-                    if i in words:
-                        wd[i] += words.count(i)
-
-            srtd_hot = sorted(wd.items(), key=lambda v: (-v[1], v[0].lower()))
-            for i in srtd_hot:
+                    for k in str(j).lower().split():
+                        if str(i) == str(k):
+                            wd[i] += 1
+            sorted_hot = sorted(wd.items(), key=lambda v: (v[1], v[0]),
+                                reverse=True)
+            for i in sorted_hot:
                 if i[1] != 0:
-                    print(f"{i[0]}: {i[1]}")
+                    print("{}: {}".format(i[0], i[1]))
     except Exception:
         return
