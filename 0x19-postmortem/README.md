@@ -1,8 +1,12 @@
 # Postmortem: "The Great Database Dilemma: Conquering Slow Response Times in My Django Web App"
 
+![Flash response](https://media.tenor.com/W6ODvkn-oKsAAAAd/zootopia-zootopiagifs.gif)
+
 ## Issue Summary:
 Duration: May 15, 2023, 2:00 PM - May 16, 2023, 10:00 AM (EST)
+
 Impact: My web app experienced intermittent slowdowns and occasional unresponsiveness, making users feel like they were waiting for a sloth on a coffee break. Approximately 20% of users reported delays in page loading and actions, leading to a surge in frustrated sighs.
+
 Root Cause: Inefficient database queries resulted in excessive load on the database server, turning it into the IT department's version of a grumpy, overworked librarian.
 
 ## Timeline:
